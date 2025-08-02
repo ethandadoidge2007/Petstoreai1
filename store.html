@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PetstoreAI Shop - Pet Food</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; background: #181818; color: #fff; margin: 0; padding: 20px; }
+        header, footer { background: #222; color: #fff; padding: 10px; }
+        nav a { color: #fff; margin-right: 15px; text-decoration: none; font-weight: bold; }
+        main { background: #232323; padding: 20px; margin-top: 10px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+        .food-list { display: flex; flex-wrap: wrap; gap: 24px; justify-content: flex-start; }
+        .food-card {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 10px;
+            width: 260px;
+            padding: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .food-card img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border: 2px solid #444;
+        }
+        .food-card h3 {
+            margin: 8px 0 4px 0;
+            color: #fff;
+            font-size: 1.1em;
+        }
+        .food-card .brand {
+            color: #7ecfff;
+            font-size: 0.98em;
+            margin-bottom: 6px;
+        }
+        .food-card p {
+            margin: 0 0 8px 0;
+            font-size: 0.97em;
+            color: #ccc;
+        }
+        .food-card .price {
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section-title {
+            margin-top: 30px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+        /* Chatbot styles */
+        #chatbot {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            max-width: 80%;
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        .chat-header {
+            background: #0077ff;
+            color: #fff;
+            padding: 10px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .chat-log {
+            padding: 10px;
+            flex-grow: 1;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+        .chat-log div {
+            margin-bottom: 8px;
+        }
+        #chatinput {
+            width: calc(100% - 80px);
+            padding: 10px;
+            border: none;
+            border-top: 1px solid #333;
+            background: #181818;
+            color: #fff;
+            border-radius: 0 0 10px 10px;
+        }
+        #chatform {
+            display: flex;
+            border-top: 1px solid #333;
+        }
+        #chatform button {
+            padding: 10px;
+            background: #0077ff;
+            border: none;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 0 0 10px 10px;
+        }
+        .collapsed {
+            height: 40px;
+            overflow: hidden;
+        }
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            font-size: 0.9em;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PetstoreAI Shop</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="store.html">Shop</a>
+            <a href="#">Adopt</a>
+            <a href="#">Care Tips</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+    <main>
+        <h2 class="section-title">Premium Pet Food Selection</h2>
+        <div class="food-list">
+            <div class="food-card">
+                <img src="royalchanin.png" alt="Royal Canin Dog Food">
+                <h3>Royal Canin Medium Adult Dry Dog Food</h3>
+                <div class="brand">Royal Canin</div>
+                <p>Complete and balanced nutrition for medium breed adult dogs. Supports healthy digestion and coat.</p>
+                <div class="price">$54.99 (15kg)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://www.hillspet.com/content/dam/cp-sites/hills/hills-pet/en_us/products/cat/science-diet/SD_FEL_Adult_Indoor_Chicken_Product_Image_500x500.png" alt="Hill's Science Diet Cat Food">
+                <h3>Hill's Science Diet Adult Indoor Cat Food</h3>
+                <div class="brand">Hill's Science Diet</div>
+                <p>Specially formulated for indoor cats. Promotes healthy weight and easy litter box clean-up.</p>
+                <div class="price">$39.99 (7kg)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://kaytee.com/-/media/Project/OneWeb/Kaytee/US/Images/Products/Feed/Parrot/Forti-Diet-Pro-Health-Parrot-5lb-100033677.jpg" alt="Kaytee Forti-Diet Pro Health Parrot Food">
+                <h3>Kaytee Forti-Diet Pro Health Parrot Food</h3>
+                <div class="brand">Kaytee</div>
+                <p>Rich in natural antioxidants for general health and immune support. Omega-3 for brain and heart health.</p>
+                <div class="price">$18.99 (2.27kg)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://www.oxbowanimalhealth.com/wp-content/uploads/2021/06/Essentials-Adult-Rabbit-Food-4.5-lb-Front.png" alt="Oxbow Essentials Adult Rabbit Food">
+                <h3>Oxbow Essentials Adult Rabbit Food</h3>
+                <div class="brand">Oxbow</div>
+                <p>Timothy hay-based pellets for adult rabbits. Supports digestive and dental health.</p>
+                <div class="price">$24.99 (4.5kg)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://www.tetra-fish.com/-/media/Project/OneWeb/Tetra/US/Images/Products/Food/77101-TetraMin-Tropical-Flakes-7-06oz-Front.png" alt="TetraMin Tropical Flakes">
+                <h3>TetraMin Tropical Flakes Fish Food</h3>
+                <div class="brand">Tetra</div>
+                <p>Complete diet for all tropical fish. Clean and clear water formula with balanced nutrition.</p>
+                <div class="price">$12.99 (200g)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://bluebuffalo.com/globalassets/product-images/dog/life-protection-formula/puppy-chicken-and-brown-rice/blue-lpf-dog-dry-puppy-chicken-brown-rice-recipe-5lb-front.png" alt="Blue Buffalo Puppy Food">
+                <h3>Blue Buffalo Life Protection Puppy Chicken & Brown Rice</h3>
+                <div class="brand">Blue Buffalo</div>
+                <p>High-protein puppy food with real chicken and wholesome grains. DHA for cognitive development.</p>
+                <div class="price">$29.99 (6kg)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://www.purina.com/sites/default/files/styles/product_500x500/public/2022-10/Purina-ONE-Healthy-Kitten-Formula.png" alt="Purina ONE Kitten Food">
+                <h3>Purina ONE Healthy Kitten Formula</h3>
+                <div class="brand">Purina ONE</div>
+                <p>Rich in protein and DHA for growing kittens. Supports vision and brain development.</p>
+                <div class="price">$19.99 (2kg)</div>
+            </div>
+            <div class="food-card">
+                <img src="https://www.vitakraft.us/-/media/Project/OneWeb/Vitakraft/US/Images/Products/Small-Animal/Food/VitaSmart-Hamster-Food-2lb-34714.png" alt="Vitakraft VitaSmart Hamster Food">
+                <h3>Vitakraft VitaSmart Hamster Food</h3>
+                <div class="brand">Vitakraft</div>
+                <p>Blend of grains, seeds, and vegetables for a healthy hamster diet. No artificial flavors or preservatives.</p>
+                <div class="price">$8.99 (1kg)</div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>© 2025 PetstoreAI. All rights reserved.</p>
+    </footer>
+
+    <!-- Simple AI Chatbot -->
+    <div id="chatbot" class="">
+        <div class="chat-header" id="chatHeader">
+            PetstoreAI Chat
+            <button class="expand-btn" id="expandBtn" title="Expand/Collapse">&#x25B2;</button>
+        </div>
+        <div id="chatlog" class="chat-log"></div>
+        <form id="chatform">
+            <input id="chatinput" type="text" placeholder="Ask me about pets!">
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <script>
+    const chatlog = document.getElementById('chatlog');
+    const chatform = document.getElementById('chatform');
+    const chatinput = document.getElementById('chatinput');
+    const chatbot = document.getElementById('chatbot');
+    const expandBtn = document.getElementById('expandBtn');
+    const chatHeader = document.getElementById('chatHeader');
+    let isCollapsed = false;
+
+    expandBtn.onclick = function(e) {
+        e.stopPropagation();
+        isCollapsed = !isCollapsed;
+        if (isCollapsed) {
+            chatbot.classList.add('collapsed');
+            expandBtn.innerHTML = '&#x25BC;';
+        } else {
+            chatbot.classList.remove('collapsed');
+            expandBtn.innerHTML = '&#x25B2;';
+        }
+    };
+    chatHeader.onclick = function() {
+        expandBtn.click();
+    };
+    chatform.onsubmit = async function(e) {
+        e.preventDefault();
+        if (isCollapsed) return;
+        const userMsg = chatinput.value.trim();
+        if (!userMsg) return;
+        chatlog.innerHTML += `<div><b>You:</b> ${userMsg}</div>`;
+        chatinput.value = '';
+        let aiMsg = '';
+        try {
+            const response = await fetch('http://localhost:3000/ask', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: userMsg})
+            });
+            const data = await response.json();
+            aiMsg = data.reply;
+        } catch (err) {
+            aiMsg = 'Sorry, there was a problem contacting the AI.';
+        }
+        chatlog.innerHTML += `<div style='color:#0077ff'><b>AI:</b> ${aiMsg}</div>`;
+        chatlog.scrollTop = chatlog.scrollHeight;
+    };
+    </script>
+</body>
+</html>
